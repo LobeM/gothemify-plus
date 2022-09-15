@@ -1,0 +1,16 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "gothemify-plus/page-header",
+  "title": "Page Header",
+  "category": "text",
+  "description": "Adds a page header",
+  "textdomain": "gothemify-plus",
+  "attributes": {
+    "content": {
+      "type": "string"
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./index.css"
+}

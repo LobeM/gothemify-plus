@@ -7,6 +7,9 @@ function gtp_register_blocks()
         ['name' => 'search-form', 'options' => [
             'render_callback' => 'gt_search_form_render_cb',
         ]],
+        ['name' => 'page-header', 'options' => [
+            'render_callback' => 'gt_page_header_render_cb',
+        ]],
     ];
 
     foreach ($blocks as $block) {
