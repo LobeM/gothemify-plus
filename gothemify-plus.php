@@ -20,9 +20,13 @@ if (!function_exists('add_action')) {
 define('GTP_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
 // Includes
-include GTP_PLUGIN_DIR . 'includes/register-blocks.php';
-include GTP_PLUGIN_DIR . 'includes/blocks/search-form.php';
-include GTP_PLUGIN_DIR . 'includes/blocks/page-header.php';
+$rootFiles = glob(GTP_PLUGIN_DIR . 'includes/*.php');
+$subdirectoryFiles = glob(GTP_PLUGIN_DIR . 'includes/**/*.php');
+$allFiles = array_merge($rootFiles, $subdirectoryFiles);
+
+foreach ($allFiles as $filename) {
+    include_once $filename;
+}
 
 // Hooks
 add_action('init', 'gtp_register_blocks');
