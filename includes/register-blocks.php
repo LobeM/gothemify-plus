@@ -10,6 +10,9 @@ function gtp_register_blocks()
         ['name' => 'page-header', 'options' => [
             'render_callback' => 'gt_page_header_render_cb',
         ]],
+        ['name' => 'header-tools', 'options' => [
+            'render_callback' => 'gt_header_tools_render_cb',
+        ]],
     ];
 
     foreach ($blocks as $block) {
