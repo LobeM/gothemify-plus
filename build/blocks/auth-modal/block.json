@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "gothemify-plus/auth-modal",
+  "title": "Authentication Modal",
+  "category": "text",
+  "description": "Adds an authentication modal",
+  "textdomain": "gothemify-plus",
+  "attributes": {
+    "showRegister": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./index.css"
+}

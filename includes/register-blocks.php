@@ -13,6 +13,9 @@ function gtp_register_blocks()
         ['name' => 'header-tools', 'options' => [
             'render_callback' => 'gt_header_tools_render_cb',
         ]],
+        ['name' => 'auth-modal', 'options' => [
+            'render_callback' => 'gt_auth_modal_render_cb',
+        ]],
     ];
 
     foreach ($blocks as $block) {
