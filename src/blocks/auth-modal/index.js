@@ -1,6 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody } from '@wordpress/components';
+import { PanelBody, ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import icons from '../../icons.js';
 import './main.css';
@@ -16,7 +16,19 @@ registerBlockType('gothemify-plus/auth-modal', {
 		return (
 			<>
 				<InspectorControls>
-					<PanelBody title={__('General', 'gothemify-plus')}></PanelBody>
+					<PanelBody title={__('General', 'gothemify-plus')}>
+						<ToggleControl
+							label={__('Show Register', 'gothemify-plus')}
+							help={__(
+								showRegister
+									? 'Showing registration form'
+									: 'Hiding registration form',
+								'gothemify-plus'
+							)}
+							checked={showRegister}
+							onChange={(showRegister) => setAttributes({ showRegister })}
+						/>
+					</PanelBody>
 				</InspectorControls>
 				<div {...blockProps}>
 					{__(
