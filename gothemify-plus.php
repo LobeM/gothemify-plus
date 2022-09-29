@@ -30,3 +30,4 @@ foreach ($allFiles as $filename) {
 
 // Hooks
 add_action('init', 'gtp_register_blocks');
+add_action('rest_api_init', 'gtp_rest_api_init');
