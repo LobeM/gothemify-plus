@@ -26,6 +26,24 @@ function gtp_rest_api_signup_handler($request)
         return $response;
     }
 
+    $userID = wp_insert_user([
+        'user_login' => $username,
+        'user_pass' => $password,
+        'user_email' => $email,
+    ]);
+
+    if (is_wp_error($userID)) {
+        return $response;
+    }
+
+    wp_new_user_notification($userID, null, 'user');
+    wp_set_current_user($userID);
+    wp_set_auth_cookie($userID);
+
+    $user = get_user_by('id', $userID);
+
+    do_action('wp_login', $user->user_login, $user);
+
     $response['status'] = 2;
     return $response;
 }
