@@ -32,3 +32,4 @@ foreach ($allFiles as $filename) {
 add_action('init', 'gtp_register_blocks');
 add_action('rest_api_init', 'gtp_rest_api_init');
 add_action('wp_enqueue_scripts', 'gtp_enqueue_scripts');
+add_action('init', 'gtp_recipe_post_type');
