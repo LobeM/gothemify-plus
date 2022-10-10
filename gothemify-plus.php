@@ -35,3 +35,6 @@ add_action('rest_api_init', 'gtp_rest_api_init');
 add_action('wp_enqueue_scripts', 'gtp_enqueue_scripts');
 add_action('init', 'gtp_recipe_post_type');
 add_action('cuisine_add_form_fields', 'gtp_cuisine_add_form_fields');
+add_action('create_cuisine', 'gtp_save_cuisine_meta');
+add_action('cuisine_edit_form_fields', 'gtp_cuisine_edit_form_fields');
+add_action('editied_cuisine', 'gtp_save_cuisine_meta');
