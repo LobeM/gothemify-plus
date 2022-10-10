@@ -1,6 +1,8 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
+import { useEntityProp } from '@wordpress/core-data';
+import { useSelect } from '@wordpress/data';
 import icons from '../../icons.js';
 import './main.css';
 
@@ -8,9 +10,18 @@ registerBlockType('gothemify-plus/recipe-summary', {
   icon: {
     src: icons.primary,
   },
-  edit({ attributes, setAttributes }) {
+  edit({ attributes, setAttributes, context }) {
     const { prepTime, cookTime, course } = attributes;
     const blockProps = useBlockProps();
+    const { postId } = context;
+
+    const [termIDs] = useEntityProp('postType', 'recipe', 'cuisine', postId);
+
+    useSelect(() => {
+      console.log('useSelect called');
+    }, [termIDs]);
+
+    console.log(termIDs);
 
     return (
       <>
