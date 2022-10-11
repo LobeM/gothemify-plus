@@ -292,10 +292,19 @@ __webpack_require__.r(__webpack_exports__);
       postId
     } = context;
     const [termIDs] = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_4__.useEntityProp)('postType', 'recipe', 'cuisine', postId);
-    (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.useSelect)(() => {
-      console.log('useSelect called');
+    const {
+      cusines
+    } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.useSelect)(select => {
+      const {
+        getEntityRecords
+      } = select('core');
+      return {
+        cusines: getEntityRecords('taxonomy', 'cuisine', {
+          include: termIDs
+        })
+      };
     }, [termIDs]);
-    console.log(termIDs);
+    console.log(cusines);
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
       className: "bi bi-alarm"
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -349,7 +358,12 @@ __webpack_require__.r(__webpack_exports__);
       className: "recipe-title"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Cuisine', 'gothemify-plus')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "recipe-data recipe-cuisine"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
+    }, cusines && cusines.map((item, index) => {
+      const comma = cusines[index + 1] ? ', ' : '';
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+        href: item.meta.more_info_url
+      }, item.name), comma);
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
       className: "bi bi-egg-fried"
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "recipe-metadata"

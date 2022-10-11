@@ -17,11 +17,20 @@ registerBlockType('gothemify-plus/recipe-summary', {
 
     const [termIDs] = useEntityProp('postType', 'recipe', 'cuisine', postId);
 
-    useSelect(() => {
-      console.log('useSelect called');
-    }, [termIDs]);
+    const { cusines } = useSelect(
+      (select) => {
+        const { getEntityRecords } = select('core');
 
-    console.log(termIDs);
+        return {
+          cusines: getEntityRecords('taxonomy', 'cuisine', {
+            include: termIDs,
+          }),
+        };
+      },
+      [termIDs]
+    );
+
+    console.log(cusines);
 
     return (
       <>
@@ -74,7 +83,19 @@ registerBlockType('gothemify-plus/recipe-summary', {
                 <div className='recipe-title'>
                   {__('Cuisine', 'gothemify-plus')}
                 </div>
-                <div className='recipe-data recipe-cuisine'></div>
+                <div className='recipe-data recipe-cuisine'>
+                  {cusines &&
+                    cusines.map((item, index) => {
+                      const comma = cusines[index + 1] ? ', ' : '';
+
+                      return (
+                        <>
+                          <a href={item.meta.more_info_url}>{item.name}</a>
+                          {comma}
+                        </>
+                      );
+                    })}
+                </div>
               </div>
               <i className='bi bi-egg-fried'></i>
             </div>
