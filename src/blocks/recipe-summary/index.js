@@ -4,6 +4,7 @@ import { __ } from '@wordpress/i18n';
 import { useEntityProp } from '@wordpress/core-data';
 import { useSelect } from '@wordpress/data';
 import { Spinner } from '@wordpress/components';
+import Rating from '@mui/material/Rating/index.js';
 import icons from '../../icons.js';
 import './main.css';
 
@@ -36,6 +37,16 @@ registerBlockType('gothemify-plus/recipe-summary', {
       },
       [termIDs]
     );
+
+    const { rating } = useSelect((select) => {
+      const { getCurrentPostAttribute } = select('core/editor');
+
+      return {
+        rating: getCurrentPostAttribute('meta').recipe_rating,
+      };
+    });
+
+    console.log(rating);
 
     return (
       <>
@@ -110,7 +121,9 @@ registerBlockType('gothemify-plus/recipe-summary', {
               <div className='recipe-title'>
                 {__('Rating', 'gothemify-plus')}
               </div>
-              <div className='recipe-data'></div>
+              <div className='recipe-data'>
+                <Rating value={rating} readOnly />
+              </div>
               <i className='bi bi-hand-thumbs-up'></i>
             </div>
           </div>

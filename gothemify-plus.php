@@ -38,3 +38,4 @@ add_action('cuisine_add_form_fields', 'gtp_cuisine_add_form_fields');
 add_action('create_cuisine', 'gtp_save_cuisine_meta');
 add_action('cuisine_edit_form_fields', 'gtp_cuisine_edit_form_fields');
 add_action('editied_cuisine', 'gtp_save_cuisine_meta');
+add_action('save_post_recipe', 'gtp_save_post_recipe');
