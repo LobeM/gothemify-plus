@@ -1,5 +1,6 @@
 import Rating from '@mui/material/Rating/index.js';
 import { render, useState } from '@wordpress/element';
+import apiFetch from '@wordpress/api-fetch';
 
 function RecipeRating(props) {
   const [avgRating, setAvgRating] = useState(props.avgRating);
@@ -9,7 +10,7 @@ function RecipeRating(props) {
     <Rating
       value={avgRating}
       precision={0.5}
-      onChange={async () => {
+      onChange={async (event, rating) => {
         if (!permission) {
           return alert(
             'You have already rated this recipe or you may need to log in.'
@@ -17,6 +18,19 @@ function RecipeRating(props) {
         }
 
         setPermission(false);
+
+        const response = await apiFetch({
+          path: 'gtp/v1/rate',
+          method: 'POST',
+          data: {
+            postID: props.postID,
+            rating,
+          },
+        });
+
+        if (response.status == 2) {
+          setAvgRating(response.rating);
+        }
       }}
     />
   );
