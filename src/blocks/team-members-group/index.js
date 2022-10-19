@@ -15,7 +15,9 @@ registerBlockType('gothemify-plus/team-members-group', {
   },
   edit({ attributes, setAttributes }) {
     const { columns, imageShape } = attributes;
-    const blockProps = useBlockProps();
+    const blockProps = useBlockProps({
+      className: `cols-${columns}`,
+    });
 
     return (
       <>
@@ -25,6 +27,8 @@ registerBlockType('gothemify-plus/team-members-group', {
               label={__('Columns', 'gothemify-plus')}
               onChange={(columns) => setAttributes({ columns })}
               value={columns}
+              min={2}
+              max={4}
             />
             <SelectControl
               label={__('Image Shape', 'gothemify-plus')}
@@ -42,13 +46,29 @@ registerBlockType('gothemify-plus/team-members-group', {
           <InnerBlocks
             orientation='horizontal'
             allowedBlocks={['gothemify-plus/team-member']}
+            template={[
+              [
+                'gothemify-plus/team-member',
+                {
+                  name: 'John Doe',
+                  title: 'CEO of Go Themify',
+                  bio: 'This is an example of a bio.',
+                },
+              ],
+              ['gothemify-plus/team-member'],
+              ['gothemify-plus/team-member'],
+            ]}
+            // templateLock="all"
           />
         </div>
       </>
     );
   },
   save({ attributes }) {
-    const blockProps = useBlockProps.save();
+    const { columns } = attributes;
+    const blockProps = useBlockProps.save({
+      className: `cols-${columns}`,
+    });
 
     return (
       <div {...blockProps}>
